@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
-add_action( 'wp_footer', 'jet_ptfo_init', 8 );
+add_action( 'wp_footer', 'jet_ptfo_init', 10 );
 
 function jet_ptfo_init() {
 
@@ -63,6 +63,13 @@ function jet_ptfo_init() {
 
 		if ( $enabled ) {
 			jet_popup()->generator->popup_id_list[] = $popup;
+		} else {
+			$index = array_search( $popup, jet_popup()->generator->popup_id_list );
+
+			if ( false !== $index ) {
+				unset( jet_popup()->generator->popup_id_list[ $index ] );
+			}
+
 		}
 
 	}
@@ -72,7 +79,7 @@ function jet_ptfo_init() {
 /**
  * Config example
  */
-/*add_filter( 'jet-ptfo/config', function( $config ) {
+add_filter( 'jet-ptfo/config', function( $config ) {
 
 	$config[] = array(
 		'page' => 'color-options',
@@ -81,4 +88,4 @@ function jet_ptfo_init() {
 	);
 
 	return $config;
-} );*/
+} );
