@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: JetPopup - control popup from options  page
+ * Plugin Name: JetPopup - control popup from options page
  * Plugin URI:  #
  * Description: Allow to enable/disable popup visibility from JetEngine option page
  * Version:     1.0.0
