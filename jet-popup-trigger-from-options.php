@@ -62,6 +62,9 @@ function jet_ptfo_init() {
 		}
 
 		if ( $enabled ) {
+			if ( $popup != jet_popup()->conditions->find_matched_conditions( 'jet-popup' ) ) {
+				continue;
+			}
 			jet_popup()->generator->popup_id_list[] = $popup;
 		} else {
 			$index = array_search( $popup, jet_popup()->generator->popup_id_list );
