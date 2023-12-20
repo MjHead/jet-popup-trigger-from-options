@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
-add_action( 'wp_footer', 'jet_ptfo_init', 10 );
+add_action( 'wp_footer', 'jet_ptfo_init', 2 );
 
 function jet_ptfo_init() {
 
@@ -62,15 +62,19 @@ function jet_ptfo_init() {
 		}
 
 		if ( $enabled ) {
-			if ( $popup != jet_popup()->conditions->find_matched_conditions( 'jet-popup' ) ) {
+			if ( $popup != jet_popup()->conditions_manager->find_matched_popups_by_conditions() ) {
 				continue;
 			}
 			jet_popup()->generator->popup_id_list[] = $popup;
 		} else {
-			$index = array_search( $popup, jet_popup()->generator->popup_id_list );
-
-			if ( false !== $index ) {
-				unset( jet_popup()->generator->popup_id_list[ $index ] );
+			$popups = jet_popup()->generator->defined_popup_list;
+			
+			foreach( $popups as $key => $data ) {
+				if ( $data['id'] !== $popup ) {
+					continue;
+				} else {
+					unset(jet_popup()->generator->defined_popup_list[ $key ]);
+				}
 			}
 
 		}
